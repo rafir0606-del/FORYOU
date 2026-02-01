@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity & Beyond | For Tanha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&family=Great+Vibes&family=Playfair+Display:italic,wght@1,700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --rose: #ff85a2;
+            --dark-pink: #c9184a;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #fb7185, #fdba74, #f472b6);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh; overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        @keyframes gradientBG { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
+
+        .decor { position: fixed; pointer-events: none; z-index: 1; animation: floatAnim 8s infinite ease-in-out; opacity: 0.6; }
+        @keyframes floatAnim { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.1); } }
+
+        .screen {
+            position: absolute; width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; transform: translateX(100px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none; z-index: 10;
+        }
+
+        .screen.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+
+        .card {
+            background: var(--glass);
+            border: 4px solid var(--gold);
+            border-radius: 40px;
+            padding: 40px;
+            max-width: 700px; width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2), inset 0 0 20px rgba(212,175,55,0.2);
+            max-height: 85vh; overflow-y: auto;
+        }
+
+        h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--dark-pink); margin-bottom: 15px; }
+        h2 { font-family: 'Pacifico', cursive; font-size: 2rem; color: var(--gold); margin-bottom: 20px; }
+
+        .cake-container { position: relative; width: 200px; height: 250px; margin: 20px auto; cursor: pointer; }
+        .layer { position: absolute; left: 50%; transform: translateX(-50%); background: #fecdd3; border: 3px solid #fb7185; border-radius: 15px 15px 5px 5px; }
+        .layer-bottom { width: 180px; height: 60px; bottom: 0; }
+        .layer-middle { width: 140px; height: 50px; bottom: 60px; background: #fda4af; }
+        .layer-top { width: 100px; height: 40px; bottom: 110px; background: #fb7185; }
+        .icing { position: absolute; top: 0; width: 100%; height: 15px; background: #fff; border-radius: 15px 15px 0 0; }
+        
+        .candle { position: absolute; bottom: 150px; left: 50%; transform: translateX(-50%); width: 12px; height: 40px; background: var(--gold); border-radius: 5px; }
+        .flame { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 15px; height: 25px; background: #ff7e00; border-radius: 50%; box-shadow: 0 0 15px #ff7e00; animation: flicker 0.2s infinite; }
+        .blown .flame { display: none; }
+        @keyframes flicker { 0% {transform: translateX(-50%) scale(1.1);} 100% {transform: translateX(-50%) scale(0.9);} }
+
+        .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
+        .t-box { background: var(--dark-pink); color: white; padding: 10px; border-radius: 15px; border: 2px solid var(--gold); }
+        .t-box b { display: block; font-size: 1.5rem; }
+
+        .m-box { background: rgba(212,175,55,0.1); border-left: 5px solid var(--gold); padding: 15px; margin: 15px 0; text-align: left; border-radius: 0 15px 15px 0; }
+        
+        #typing-text { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.1rem; 
+            line-height: 1.7; 
+            text-align: left; 
+            color: #333; 
+            min-height: 300px;
+            white-space: pre-wrap;
+        }
+
+        .btn {
+            background: linear-gradient(to right, #d4af37, #fde68a);
+            border: none; padding: 15px 40px; border-radius: 50px;
+            font-size: 1.1rem; font-weight: bold; color: #5c4300;
+            cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.4s; margin-top: 20px;
+        }
+        .btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 25px rgba(212,175,55,0.4); }
+
+    </style>
+</head>
+<body>
+
+    <div class="decor" style="top:5%; left:5%; font-size: 50px;">🎂</div>
+    <div class="decor" style="top:15%; right:10%; font-size: 40px;">💖</div>
+    <div class="decor" style="bottom:10%; left:8%; font-size: 45px;">🌸</div>
+    <div class="decor" style="bottom:20%; right:5%; font-size: 35px;">✨</div>
+
+    <div class="screen active" id="p1">
+        <div class="card">
+            <h1>Dear Tanha...</h1>
+            <p>Your grand celebration is approaching!</p>
+            <div class="timer-grid">
+                <div class="t-box"><b id="d">00</b>Days</div>
+                <div class="t-box"><b id="h">00</b>Hrs</div>
+                <div class="t-box"><b id="m">00</b>Min</div>
+                <div class="t-box"><b id="s">00</b>Sec</div>
+            </div>
+            <button class="btn" onclick="nav('p2')">Unlock The Magic →</button>
+        </div>
+    </div>
+
+    <div class="screen" id="p2">
+        <div class="card">
+            <h2>Words of Wisdom & Blessings</h2>
+            <div class="m-box">
+                <b>Faith:</b> "The most beloved actions to Allah are those that are continuous, even if small. May your good deeds ever increase."
+            </div>
+            <div class="m-box">
+                <b>Beauty:</b> "True beauty is not in the face; true beauty is a light in the heart. May your heart always shine with purity (Taqwa)."
+            </div>
+            <div class="m-box">
+                <b>Trust:</b> "And put your trust in Allah; for Allah is sufficient as a disposer of affairs. Always rely on Him."
+            </div>
+            <button class="btn" onclick="nav('p3')">Next Surprise ✨</button>
+        </div>
+    </div>
+
+    <div class="screen" id="p3">
+        <div class="card">
+            <h2>Luxury Cake For You!</h2>
+            <p>Touch the flame to blow it out</p>
+            <div class="cake-container" onclick="blow()">
+                <div class="candle" id="cndl"><div class="flame"></div></div>
+                <div class="layer layer-top"><div class="icing"></div></div>
+                <div class="layer layer-middle"><div class="icing"></div></div>
+                <div class="layer layer-bottom"><div class="icing"></div></div>
+            </div>
+            <h2 id="wish" style="display:none; color: var(--dark-pink); font-size: 1.5rem;">Make A Wish DARLING! ✨</h2>
+            <button class="btn" id="nextBtn" style="display:none;" onclick="nav('p4')">Open Your Letter ✉️</button>
+        </div>
+    </div>
+
+    <div class="screen" id="p4">
+        <div class="card">
+            <h1>A Special Message</h1>
+            <div id="typing-text"></div>
+            <button class="btn" id="startOver" style="display:none;" onclick="location.reload()">Back to Home ♡</button>
+        </div>
+    </div>
+
+    <script>
+        function nav(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(id === 'p4') startTyping();
+        }
+
+        function blow() {
+            document.getElementById('cndl').classList.add('blown');
+            document.getElementById('wish').style.display = 'block';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        const target = new Date("February 2, 2026 00:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = target - now;
+            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
+
+        // --- MODIFIED LETTER ---
+        const text = `Assalamu Alaikum, Tanha,\n\nOn this beautiful and blessed day of February 2nd, my heart is filled with gratitude. I thank Allah (SWT) for sending such a pure soul like you into this world and making you my favourite person. \n\nMay Allah (SWT) shower you with endless mercy and light, and may you always remain steadfast on the path of truth (Deen). Seeing you grow into the wonderful person you are today makes me so happy. \n\nOur bond is something I treasure more than words can say. No matter how many birthdays pass, or how far life takes us, remember that you will always have me who stands behind you like a rock. In every joy, I'll be there to cheer, and in every storm, I'll be there to protect you. \n\nI pray that this year brings you infinite peace, deep faith (Iman), and success that knows no bounds. May your heart always stay as kind as it is now, and may your face never lose that beautiful smile. \n\nHave the most wonderful birthday, Tanha! Keep shining, keep dreaming, and know that you are deeply loved. \n\nAlways with you,\nOsru.`;
+        
+        let i = 0;
+        function startTyping() {
+            if (i < text.length) {
+                let char = text.charAt(i);
+                document.getElementById("typing-text").innerHTML += char === '\n' ? '<br>' : char;
+                i++;
+                // Typing speed: 40ms per character for better readability
+                setTimeout(startTyping, 40);
+            } else {
+                document.getElementById('startOver').style.display = 'inline-block';
+            }
+        }
+    </script>
+</body>
+</html>
